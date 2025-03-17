@@ -20,6 +20,7 @@ public class CreateProductService implements Command<Product, ProductDTO> {
 
     @Override
     public ResponseEntity<ProductDTO> execute(Product product) {
+        // Save returns product entity
         Product savedProduct = productRepository.save(product);
         return ResponseEntity.status(HttpStatus.CREATED).body(new ProductDTO(savedProduct));
     }
