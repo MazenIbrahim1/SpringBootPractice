@@ -1,4 +1,4 @@
-package com.example.nobsv2.product;
+package com.example.nobsv2.product.services;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

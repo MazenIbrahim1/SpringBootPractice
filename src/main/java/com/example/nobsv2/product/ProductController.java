@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.nobsv2.product.services.CreateProductService;
+import com.example.nobsv2.product.services.DeleteProductService;
+import com.example.nobsv2.product.services.GetProductService;
+import com.example.nobsv2.product.services.UpdateProdcutService;
+
 @RestController
 public class ProductController {
     // Constructor Dependency Injection
