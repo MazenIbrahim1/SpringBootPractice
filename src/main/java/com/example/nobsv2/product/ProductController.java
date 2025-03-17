@@ -52,27 +52,27 @@ public class ProductController {
     // @Autowired
     // private GetProductService getProductService;
 
-    @PostMapping
+    @PostMapping("/product")
     public ResponseEntity<ProductDTO> createProduct(@RequestBody Product product) {
         return createProductService.execute(product);
     }
 
-    @GetMapping
+    @GetMapping("/products")
     public ResponseEntity<List<ProductDTO>> getProducts() {
         return getProductService.execute(null);
     }
 
-    @GetMapping
+    @GetMapping("/product/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable Integer id) {
         return getProductByIdService.execute(id);
     }
 
-    @PutMapping
+    @PutMapping("/product/{id}")
     public ResponseEntity<ProductDTO> updateProduct(@PathVariable Integer id, @RequestBody Product product) {
         return updateProdcutService.execute(new UpdateProductCommand(id, product));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/product/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Integer id) {
         return deleteProductService.execute(id);
     }
