@@ -1,5 +1,7 @@
 package com.example.nobsv2.product;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.nobsv2.product.model.Product;
 import com.example.nobsv2.product.services.CreateProductService;
 import com.example.nobsv2.product.services.DeleteProductService;
 import com.example.nobsv2.product.services.GetProductService;
@@ -47,7 +50,7 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<String> getProduct() {
+    public ResponseEntity<List<Product>> getProduct() {
         return getProductService.execute(null);
     }
 
