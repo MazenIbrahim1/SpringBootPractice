@@ -1,16 +1,33 @@
 package com.example.nobsv2.product.services;
 
+import java.util.Optional;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.nobsv2.Command;
+import com.example.nobsv2.product.ProductRepository;
+import com.example.nobsv2.product.model.Product;
 
 @Service
-public class DeleteProductService implements Command<Void, String> {
+public class DeleteProductService implements Command<Integer, Void> {
+
+    private final ProductRepository productRepository;
+
+    public DeleteProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     @Override
-    public ResponseEntity<String> execute(Void input) {
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Product Deleted");
+    public ResponseEntity<Void> execute(Integer id) {
+        Optional<Product> productOptional = productRepository.findById(id);
+
+        if(productOptional.isPresent()) {
+            productRepository.delete(productOptional.get());
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+
+        return null;
     }
 }

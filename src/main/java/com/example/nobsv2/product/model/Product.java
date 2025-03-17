@@ -15,7 +15,7 @@ public class Product {
     @Id // MySQL primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto generates id
     @Column(name = "id") // SQL column name = "id"
-    private int id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
