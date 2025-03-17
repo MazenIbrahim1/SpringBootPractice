@@ -25,6 +25,7 @@ public class GetProductsService implements Query<Void, List<ProductDTO>> {
         List<Product> products = productRepository.findAll();
         List<ProductDTO> productDTOs = products.stream().map(ProductDTO::new).toList();
 
+        // No exception needed -> return an empty list instead
         return ResponseEntity.status(HttpStatus.OK).body(productDTOs);
     }
 }
