@@ -2,9 +2,11 @@ package com.example.nobsv2.product.services;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.example.nobsv2.Command;
 
+@Service
 public class UpdateProdcutService implements Command<Void, String> {
 
     @Override
