@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.nobsv2.product.model.Product;
@@ -18,6 +19,7 @@ import com.example.nobsv2.product.services.CreateProductService;
 import com.example.nobsv2.product.services.DeleteProductService;
 import com.example.nobsv2.product.services.GetProductByIdService;
 import com.example.nobsv2.product.services.GetProductsService;
+import com.example.nobsv2.product.services.SearchProductsService;
 import com.example.nobsv2.product.services.UpdateProdcutService;
 
 @RestController
@@ -28,17 +30,21 @@ public class ProductController {
     private final UpdateProdcutService updateProdcutService;
     private final DeleteProductService deleteProductService;
     private final GetProductByIdService getProductByIdService;
+    private final SearchProductsService searchProductsService;
 
     public ProductController(CreateProductService createProductService, 
                             DeleteProductService deleteProductService, 
                             UpdateProdcutService updateProdcutService, 
                             GetProductsService getProductService,
-                            GetProductByIdService getProductByIdService) {
+                            GetProductByIdService getProductByIdService,
+                            SearchProductsService searchProductsService) {
+                                
         this.createProductService = createProductService;
         this.getProductService = getProductService;
         this.updateProdcutService = updateProdcutService;
         this.deleteProductService = deleteProductService;
         this.getProductByIdService = getProductByIdService;
+        this.searchProductsService = searchProductsService;
     }
 
     // Dependency Injection
@@ -60,6 +66,11 @@ public class ProductController {
     @GetMapping("/products")
     public ResponseEntity<List<ProductDTO>> getProducts() {
         return getProductService.execute(null);
+    }
+
+    @GetMapping("/product/search")
+    public ResponseEntity<List<ProductDTO>> searchProductsByName(@RequestParam String name) {
+        return searchProductsService.execute(name);
     }
 
     @GetMapping("/product/{id}")
