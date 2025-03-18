@@ -8,6 +8,8 @@ class Nobsv2ApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// Sanity check or test that should always pass
+		// make sure that there is no bug or compile issue
 	}
 
 }
