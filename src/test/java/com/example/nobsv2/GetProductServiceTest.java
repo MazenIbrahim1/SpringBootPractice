@@ -53,4 +53,15 @@ public class GetProductServiceTest {
         // Verify product repository only called once
         verify(productRepository, times(1)).findById(1);
     }
+
+    @Test
+    public void given_product_doesnt_exist_when_product_get_service_return_error() {
+        // Given
+        
+
+        // When
+
+
+        // Then
+    }
 }
