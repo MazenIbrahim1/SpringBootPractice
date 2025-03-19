@@ -63,5 +63,8 @@ public class GetProductServiceTest {
 
         // When & Then
         assertThrows(ProductNotFoundException.class, () -> getProductByIdService.execute(1));
+
+        // Verify product repository only called once
+        verify(productRepository, times(1)).findById(1);
     }
 }
