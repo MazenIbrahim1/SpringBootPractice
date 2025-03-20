@@ -34,22 +34,36 @@ public class GetAllProductsServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @SuppressWarnings("null")
     @Test
     public void given_product_when_get_products_return_list_product_dtos() {
         // Given
-        Product product = new Product();
-        product.setId(1);
-        product.setName("Product Name");
-        product.setDescription("Some description that is more than 20 chars");
-        product.setPrice(9.99);
+        Product product1 = new Product();
+        product1.setId(1);
+        product1.setName("Product Name");
+        product1.setDescription("Some description that is more than 20 chars");
+        product1.setPrice(9.99);
 
-        when(productRepository.findAll()).thenReturn(Arrays.asList(product));
+        Product product2 = new Product();
+        product2.setId(2);
+        product2.setName("Product 2");
+        product2.setDescription("Description 2");
+        product2.setPrice(15.99);
+
+        when(productRepository.findAll()).thenReturn(Arrays.asList(product1, product2));
 
         // When
-        ResponseEntity<List<ProductDTO>> productDTOs = getProductsService.execute(null);
+        ResponseEntity<List<ProductDTO>> result = getProductsService.execute(null);
 
         // Then
-        assertEquals(ResponseEntity.ok(Arrays.asList(productDTOs)), productDTOs);
+        assertEquals(2, result.getBody().size());
+        assertEquals(product1.getId(), result.getBody().get(0).getId());
+        assertEquals(product1.getName(), result.getBody().get(0).getName());
+        assertEquals(product1.getDescription(), result.getBody().get(0).getDescription());
+
+        assertEquals(product2.getId(), result.getBody().get(1).getId());
+        assertEquals(product2.getName(), result.getBody().get(1).getName());
+        assertEquals(product2.getDescription(), result.getBody().get(1).getDescription());
         verify(productRepository, times(1)).findAll();
     }
 }
