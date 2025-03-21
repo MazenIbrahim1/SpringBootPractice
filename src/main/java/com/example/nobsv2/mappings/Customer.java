@@ -12,7 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 // import jakarta.persistence.OneToMany;
-//import jakarta.persistence.OneToOne;
+// import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -40,7 +40,7 @@ public class Customer {
 
     @ManyToMany
     @JoinTable(
-        name = "customer_address",
+        name = "customer_address", // table that maps customers to addresses
         joinColumns = @JoinColumn(name = "customer_id"),
         inverseJoinColumns = @JoinColumn(name = "address_id")
     ) 
