@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class GetProductByIdService implements Query<Integer, ProductDTO> {
     }
 
     @Override
+    @Cacheable("productCache")
     public ResponseEntity<ProductDTO> execute(Integer input) {
         logger.info("Executing " + getClass() + " input: " + input);
         // Optional in case there isn't a product with such ID
