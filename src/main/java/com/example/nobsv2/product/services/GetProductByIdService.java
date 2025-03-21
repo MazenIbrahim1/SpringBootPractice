@@ -2,6 +2,8 @@ package com.example.nobsv2.product.services;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +17,15 @@ import com.example.nobsv2.product.model.ProductDTO;
 public class GetProductByIdService implements Query<Integer, ProductDTO> {
     private final ProductRepository productRepository;
 
+    private static final Logger logger = LoggerFactory.getLogger(GetProductByIdService.class);
+
     public GetProductByIdService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
     @Override
     public ResponseEntity<ProductDTO> execute(Integer input) {
+        logger.info("Executing " + getClass() + " input: " + input);
         // Optional in case there isn't a product with such ID
         Optional<Product> productOptional = productRepository.findById(input);
         if(productOptional.isPresent()) {
