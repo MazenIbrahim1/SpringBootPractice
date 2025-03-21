@@ -1,0 +1,35 @@
+2025-03-21T11:33:17.124-04:00  INFO 42462 --- [nobsv2] [main] com.example.nobsv2.Nobsv2Application     : Starting Nobsv2Application using Java 19.0.1 with PID 42462 (/Users/mazen/Documents/nobsv2/target/classes started by mazen in /Users/mazen/Documents/nobsv2)
+2025-03-21T11:33:17.130-04:00  INFO 42462 --- [nobsv2] [main] com.example.nobsv2.Nobsv2Application     : No active profile set, falling back to 1 default profile: "default"
+2025-03-21T11:33:18.649-04:00  INFO 42462 --- [nobsv2] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-21T11:33:18.843-04:00  INFO 42462 --- [nobsv2] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 173 ms. Found 2 JPA repository interfaces.
+2025-03-21T11:33:20.373-04:00  INFO 42462 --- [nobsv2] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-21T11:33:20.393-04:00  INFO 42462 --- [nobsv2] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-21T11:33:20.393-04:00  INFO 42462 --- [nobsv2] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-03-21T11:33:20.470-04:00  INFO 42462 --- [nobsv2] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-21T11:33:20.470-04:00  INFO 42462 --- [nobsv2] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3203 ms
+2025-03-21T11:33:20.771-04:00  INFO 42462 --- [nobsv2] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-21T11:33:21.294-04:00  INFO 42462 --- [nobsv2] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4b55ff0a
+2025-03-21T11:33:21.298-04:00  INFO 42462 --- [nobsv2] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-21T11:33:21.478-04:00  INFO 42462 --- [nobsv2] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-21T11:33:21.524-04:00  INFO 42462 --- [nobsv2] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-03-21T11:33:21.552-04:00  INFO 42462 --- [nobsv2] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-21T11:33:21.877-04:00  INFO 42462 --- [nobsv2] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-21T11:33:22.162-04:00  INFO 42462 --- [nobsv2] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 9.2
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-21T11:33:23.431-04:00  INFO 42462 --- [nobsv2] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-21T11:33:23.442-04:00  INFO 42462 --- [nobsv2] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-21T11:33:23.920-04:00  INFO 42462 --- [nobsv2] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-21T11:33:24.630-04:00  WARN 42462 --- [nobsv2] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-21T11:33:25.198-04:00  INFO 42462 --- [nobsv2] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-03-21T11:33:25.219-04:00  INFO 42462 --- [nobsv2] [main] com.example.nobsv2.Nobsv2Application     : Started Nobsv2Application in 8.974 seconds (process running for 9.821)
+2025-03-21T11:33:28.569-04:00  INFO 42462 --- [nobsv2] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-21T11:33:28.570-04:00  INFO 42462 --- [nobsv2] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-03-21T11:33:28.581-04:00  INFO 42462 --- [nobsv2] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2025-03-21T11:33:28.663-04:00  INFO 42462 --- [nobsv2] [http-nio-8080-exec-1] c.e.n.p.services.GetProductByIdService   : Executing class com.example.nobsv2.product.services.GetProductByIdService input: 1
+2025-03-21T11:34:09.810-04:00  INFO 42462 --- [nobsv2] [http-nio-8080-exec-3] c.e.n.p.services.GetProductByIdService   : Executing class com.example.nobsv2.product.services.GetProductByIdService input: 3
