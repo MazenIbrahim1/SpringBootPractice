@@ -7,6 +7,7 @@ import org.springframework.web.client.RestTemplate;
 public class Configuration {
 
     @Bean
+    // Gives us access to rest template throughout the application
     public RestTemplate restTemplate() {
         // Configure rest template if needed
         return new RestTemplate();
