@@ -38,11 +38,16 @@ public class CatFactService implements Query<Integer, CatFactDTO> {
         headers.set("Accept", "application/json");
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        ResponseEntity<CatFactResponse> response = restTemplate
+        // Handle cat fact error response
+        try {
+            ResponseEntity<CatFactResponse> response = restTemplate
                     .exchange(uri, HttpMethod.GET, entity, CatFactResponse.class);
 
-        CatFactDTO factDTO = new CatFactDTO(response.getBody().getFact());
-        return ResponseEntity.ok(factDTO);
+            CatFactDTO factDTO = new CatFactDTO(response.getBody().getFact());
+            return ResponseEntity.ok(factDTO);
+        } catch (Exception e) {
+            throw new RuntimeException("CatFacts API is down");
+        }
     }
     
 }
