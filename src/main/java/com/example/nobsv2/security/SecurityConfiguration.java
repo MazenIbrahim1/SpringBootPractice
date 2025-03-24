@@ -21,10 +21,17 @@ public class SecurityConfiguration {
     public UserDetailsService userDetailsService(PasswordEncoder encoder) {
         UserDetails admin = User
                 .withUsername("admin")
+                .authorities("BASIC", "SPECIAL")
                 .password(encoder.encode("1"))
                 .build();
         
-        return new InMemoryUserDetailsManager(admin);
+        UserDetails user = User
+                .withUsername("user")
+                .authorities("BASIC")
+                .password(encoder.encode("2"))
+                .build();
+
+        return new InMemoryUserDetailsManager(admin, user);
     }
 
     @Bean
@@ -45,6 +52,10 @@ public class SecurityConfiguration {
                     authorize.requestMatchers("/closed").authenticated();
                     // Have to disable CSRF first for PUT, DELETE, and POST
                     authorize.requestMatchers(HttpMethod.POST, "/product").authenticated();
+
+                    // Adding authority
+                    authorize.requestMatchers(HttpMethod.GET, "/special").hasAuthority("SPECIAL");
+                    authorize.requestMatchers(HttpMethod.GET, "/basic").hasAnyAuthority("SPECIAL", "BASIC");
                 }).httpBasic(Customizer.withDefaults())
                 .build();
         } catch (Exception e) {
