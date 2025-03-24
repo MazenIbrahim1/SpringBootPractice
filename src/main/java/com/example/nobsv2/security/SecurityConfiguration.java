@@ -2,8 +2,9 @@ package com.example.nobsv2.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+// import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
@@ -15,6 +16,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableMethodSecurity
 public class SecurityConfiguration {
 
     @Bean
@@ -22,12 +24,14 @@ public class SecurityConfiguration {
         UserDetails admin = User
                 .withUsername("admin")
                 .authorities("BASIC", "SPECIAL")
+                .roles("superuser")
                 .password(encoder.encode("1"))
                 .build();
         
         UserDetails user = User
                 .withUsername("user")
                 .authorities("BASIC")
+                .roles("basicuser")
                 .password(encoder.encode("2"))
                 .build();
 
@@ -46,16 +50,18 @@ public class SecurityConfiguration {
             //.csrf(csrf -> csrf.disable())
             // Allows for POST, PUT, and DELETE mappings with authentication
             .csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(
-                authorize -> {
-                    authorize.requestMatchers("/open").permitAll();
-                    authorize.requestMatchers("/closed").authenticated();
-                    // Have to disable CSRF first for PUT, DELETE, and POST
-                    authorize.requestMatchers(HttpMethod.POST, "/product").authenticated();
+            .authorizeHttpRequests(authorize -> {
+                authorize.anyRequest().authenticated();
+                // authorize.requestMatchers("/open").permitAll();
+                // authorize.requestMatchers("/closed").authenticated();
+                // // Have to disable CSRF first for PUT, DELETE, and POST
+                // authorize.requestMatchers(HttpMethod.POST, "/product").authenticated();
 
-                    // Adding authority
-                    authorize.requestMatchers(HttpMethod.GET, "/special").hasAuthority("SPECIAL");
-                    authorize.requestMatchers(HttpMethod.GET, "/basic").hasAnyAuthority("SPECIAL", "BASIC");
+                // // Adding authority
+                // authorize.requestMatchers(HttpMethod.GET, "/special").hasAuthority("SPECIAL");
+                // authorize.requestMatchers(HttpMethod.GET, "/basic").hasAnyAuthority("SPECIAL", "BASIC");
+
+                // authorize.requestMatchers(HttpMethod.GET, "/special").hasRole("superuser");
                 }).httpBasic(Customizer.withDefaults())
                 .build();
         } catch (Exception e) {
