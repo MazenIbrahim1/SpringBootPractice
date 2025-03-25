@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 // import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
+// import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +16,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 // import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableMethodSecurity
@@ -58,6 +60,9 @@ public class SecurityConfiguration {
             // Allows for POST, PUT, and DELETE mappings with authentication
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(authorize -> {
+                authorize.requestMatchers("/createnewuser").permitAll();
+
+                // Must be at the bottom
                 authorize.anyRequest().authenticated();
 
 
@@ -71,7 +76,12 @@ public class SecurityConfiguration {
                 // authorize.requestMatchers(HttpMethod.GET, "/basic").hasAnyAuthority("SPECIAL", "BASIC");
 
                 // authorize.requestMatchers(HttpMethod.GET, "/special").hasRole("superuser");
-                }).httpBasic(Customizer.withDefaults())
+                })
+                // .httpBasic(Customizer.withDefaults())
+                .addFilterBefore(
+                    new BasicAuthenticationFilter(authenticationManager(httpSecurity)),
+                    UsernamePasswordAuthenticationFilter.class
+                )
                 .build();
         } catch (Exception e) {
             System.out.println(e);
