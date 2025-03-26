@@ -22,51 +22,23 @@ public class SecurityConfiguration {
         return httpSecurity.getSharedObject(AuthenticationManagerBuilder.class).build();
     }
 
-    // @Bean
-    // public UserDetailsService userDetailsService(PasswordEncoder encoder) {
-    //     UserDetails admin = User
-    //             .withUsername("admin")
-    //             .authorities("BASIC", "SPECIAL")
-    //             .roles("superuser")
-    //             .password(encoder.encode("1"))
-    //             .build();
-        
-    //     UserDetails user = User
-    //             .withUsername("user")
-    //             .authorities("BASIC")
-    //             .roles("basicuser")
-    //             .password(encoder.encode("2"))
-    //             .build();
-
-    //     return new InMemoryUserDetailsManager(admin, user);
-    // }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) {
-        try {
-            return httpSecurity
-            //.csrf(csrf -> csrf.disable())
-            // Allows for POST, PUT, and DELETE mappings with authentication
-            .csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(authorize -> {
-                authorize.requestMatchers("/login").permitAll();
-                authorize.requestMatchers("/createnewuser").permitAll();
-
-                // Must be at the bottom
-                authorize.anyRequest().authenticated();
-                })
-                .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .build();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        return null;
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        return httpSecurity
+        // Allows for POST, PUT, and DELETE mappings with authentication
+        .csrf(AbstractHttpConfigurer::disable)
+        .authorizeHttpRequests(authorize -> {
+            authorize.requestMatchers("/login").permitAll();
+            authorize.requestMatchers("/createnewuser").permitAll();
+            authorize.anyRequest().authenticated();
+            })
+            .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+            .build();
     }
     
     @Bean
