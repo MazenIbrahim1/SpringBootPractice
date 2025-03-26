@@ -43,7 +43,7 @@ public class JwtUtil {
     }
 
     private static SecretKey getSigninKey() {
-        byte[] keyBytes = Decoders.BASE64.decode("BaconEggAndCheeseCheeseCheems");
+        byte[] keyBytes = Decoders.BASE64.decode("BaconEggAndCheeseCheeseCheemsIGuessNowThisIsLongEnough");
         return Keys.hmacShaKeyFor(keyBytes);
     }   
 }
