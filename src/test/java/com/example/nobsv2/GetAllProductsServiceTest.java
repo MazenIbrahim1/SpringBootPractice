@@ -21,8 +21,7 @@ import com.example.nobsv2.product.model.ProductDTO;
 import com.example.nobsv2.product.services.GetProductsService;
 
 public class GetAllProductsServiceTest {
-    // TO IMPLEMENT
-
+    
     @Mock
     private ProductRepository productRepository;
 
