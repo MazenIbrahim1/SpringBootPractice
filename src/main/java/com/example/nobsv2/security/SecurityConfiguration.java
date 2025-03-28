@@ -33,9 +33,10 @@ public class SecurityConfiguration {
         // Allows for POST, PUT, and DELETE mappings with authentication
         .csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(authorize -> {
-            authorize.requestMatchers("/login").permitAll();
-            authorize.requestMatchers("/createnewuser").permitAll();
-            authorize.anyRequest().authenticated();
+            authorize.anyRequest().permitAll();
+            // authorize.requestMatchers("/login").permitAll();
+            // authorize.requestMatchers("/createnewuser").permitAll();
+            // authorize.anyRequest().authenticated();
             })
             .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
             .build();
