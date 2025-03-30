@@ -9,8 +9,8 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity // Maps java class to MySQL
-@Data
-@Table(name = "product")
+@Data   // Adds getters and setters
+@Table(name = "product")    // Name of the table/relation
 public class Product {
     @Id // MySQL primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto generates id
